@@ -1,9 +1,29 @@
-import React from 'react'
-
+import React from "react";
+import { useGetAllDestinationQuery } from "../api/DestinationApi";
 const DestinationList = () => {
-  return (
-    <div>DestinationList</div>
-  )
-}
+  const { data, isLoading, isSuccess, isError, error } =
+    useGetAllDestinationQuery();
 
-export default DestinationList
+  let content;
+  if (isLoading) {
+    content = <p>Loading...</p>;
+  } else if (isSuccess) {
+    content = data.map((destination, index) => {
+      return (
+        <article key={destination}>
+          <div className="text-center text-info p-2">
+            <div>
+              {destination.city} , {destination.country} -{" "}
+              {destination.daysNeeded} days
+            </div>
+          </div>
+        </article>
+      );
+    });
+  } else if (isError) {
+    content = <p>{error}</p>;
+  }
+  return <div>{content}</div>;
+};
+
+export default DestinationList;

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useAddDestinationMutation } from "../api/destinationApi";
+import { useAddDestinationMutation } from "../api/DestinationApi";
 
 function AddDestination() {
   const [newCity, setNewCity] = useState("");
